@@ -1,5 +1,4 @@
-import sys
-#sys.path.append('C:\\Users\\daniel.cortes\\development\\git\\apeiron-cli\\apeiron-cli\\reader')
+
 import json
 from collections import namedtuple
 
@@ -15,7 +14,9 @@ def createPdf():
     pdf.output("demo_pdf.pdf")
 
 def run():
-    with open('data.json') as json_file:
+    with open('data.json', 'r', encoding='utf8') as json_file:
         data = json.load(json_file)
-    print(data['id'])
+    print(data['name'])
+    for card in data['cards']:
+        print(card['name'])
     #createPdf()
