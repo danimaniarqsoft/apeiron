@@ -1,2 +1,3 @@
 fpdf
 jinja2
+weasyprint
