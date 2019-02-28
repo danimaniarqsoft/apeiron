@@ -38,3 +38,15 @@ https://dev.to/codemouse92/dead-simple-python-project-structure-and-imports-38c6
 For reporting:
 
 https://pbpython.com/pdf-reports.html
+
+Python open source projects:
+https://hackernoon.com/50-popular-python-open-source-projects-on-github-in-2018-c750f9bf56a0
+
+for pdfs:
+
+https://www.blog.pythonlibrary.org/2018/06/05/creating-pdfs-with-pyfpdf-and-python/
+https://pbpython.com/pdf-reports.html
+
+For reading json files
+
+https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
