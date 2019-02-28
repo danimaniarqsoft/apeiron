@@ -1,6 +1,7 @@
 
 import json
 from collections import namedtuple
+from jinja2 import Template, Environment, FileSystemLoader
 
 #from apeiron.reader import add
 
@@ -14,9 +15,15 @@ def createPdf():
     pdf.output("demo_pdf.pdf")
 
 def run():
-    with open('data.json', 'r', encoding='utf8') as json_file:
+    with open('apeiron/resources/data.json', 'r', encoding='utf8') as json_file:
         data = json.load(json_file)
     print(data['name'])
     for card in data['cards']:
         print(card['name'])
     #createPdf()
+    template = Template('Hello {{ name }}!')
+    template.render(name='John Doe')
+    env = Environment(loader=FileSystemLoader('.'))
+    template = env.get_template("apeiron/resources/templates/report.html")
+    print(template.render(title='REPORTE SEMANAL'))
+
