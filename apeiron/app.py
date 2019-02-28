@@ -4,7 +4,6 @@ Generate PDF reports from trello json
 import json
 from collections import namedtuple
 from jinja2 import Template, Environment, FileSystemLoader
-from weasyprint import HTML
 
 #from apeiron.reader import add
 
@@ -29,4 +28,3 @@ def run():
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template("apeiron/resources/templates/report.html")
     print(template.render(title='REPORTE SEMANAL'))
-
