@@ -4,6 +4,7 @@ Generate PDF reports from trello json
 import json
 from collections import namedtuple
 from jinja2 import Template, Environment, FileSystemLoader
+import apeiron.reader as r
 
 #from apeiron.reader import add
 
