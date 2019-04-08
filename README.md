@@ -8,7 +8,7 @@ plac
 cliff
 cement
 python fire
-python-nubia (*)
+python-nubia (*) - No works on Microsoft
 
 
 Referencias:
