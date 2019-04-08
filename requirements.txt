@@ -1,3 +1,5 @@
+nose
+sphinx
 fpdf
 jinja2
 weasyprint
