@@ -29,3 +29,6 @@ def run():
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template("apeiron/resources/templates/report.html")
     print(template.render(title='REPORTE SEMANAL'))
+
+def forTest():
+    return None
