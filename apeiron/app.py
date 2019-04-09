@@ -5,7 +5,7 @@ import json
 from collections import namedtuple
 from jinja2 import Template, Environment, FileSystemLoader
 import apeiron.reader as r
-
+import click
 #from apeiron.reader import add
 
 from fpdf import FPDF
@@ -32,3 +32,13 @@ def run():
 
 def forTest():
     return None
+
+@click.command()
+@click.option("--count", default=1, help="Number of greetings.")
+@click.option("--name", prompt="Your name",
+              help="The person to greet.")
+def hello(count, name):
+    """Simple program that greets NAME for a total of COUNT times."""
+    for _ in range(count):
+        click.echo("Hello, %s!" % name)
+        
