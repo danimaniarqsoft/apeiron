@@ -42,8 +42,13 @@ def calculate(data):
 
 def sort(numbers):
     for i in range(len(numbers)):
-        print(numbers[i])
-        
+        for j in range:
+            
+def swap(idx_left,idx_right,elements):
+    temp = elements[idx_left]
+    elements[idx_right] = elements[idx_left]
+    elements[idx_left] = temp
+
 if __name__ == "__main__":
     numbers = [2,3,9,3,7,6] 
     # execute only if run as a script
