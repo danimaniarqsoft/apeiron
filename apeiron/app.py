@@ -37,16 +37,14 @@ def forTest():
 @click.option("--number", prompt="factorial number",
               help="The index of the factorial number")
 def calculate(data):
-    for item in data:
+    for item in enumerate(data):
         print(item)
 
 def sort(numbers):
-    for item in numbers:
-        print(item)
-
+    for i in range(len(numbers)):
+        print(numbers[i])
+        
 if __name__ == "__main__":
-    numbers = [2,3,9,3,7,6]
+    numbers = [2,3,9,3,7,6] 
     # execute only if run as a script
     sort(numbers)
-
-
