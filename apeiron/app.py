@@ -34,11 +34,19 @@ def forTest():
     return None
 
 @click.command()
-@click.option("--count", default=1, help="Number of greetings.")
-@click.option("--name", prompt="Your name",
-              help="The person to greet.")
-def hello(count, name):
-    """Simple program that greets NAME for a total of COUNT times."""
-    for _ in range(count):
-        click.echo("Hello, %s!" % name)
-        
+@click.option("--number", prompt="factorial number",
+              help="The index of the factorial number")
+def calculate(data):
+    for item in data:
+        print(item)
+
+def sort(numbers):
+    for item in numbers:
+        print(item)
+
+if __name__ == "__main__":
+    numbers = [2,3,9,3,7,6]
+    # execute only if run as a script
+    sort(numbers)
+
+
