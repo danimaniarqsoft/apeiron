@@ -6,15 +6,26 @@ from collections import namedtuple
 from jinja2 import Template, Environment, FileSystemLoader
 import apeiron.reader as r
 import click
-#from apeiron.reader import add
+
+@click.group()
+def cli():
+    pass
 
 @click.command()
 @click.option("--n", default=1, prompt="factorial number", help="The number of the factorial")
-def cli(n):
-    print(factorial(n))
-
 def factorial(n):
+    print(fact(int(n)))
+
+@click.command()
+@click.option("--m", default="[no message]", prompt="common message", help="print a common messsage")
+def message(m):
+    print(m)
+
+def fact(n):
     if(n<2):
         return 1
     else:
-        return n*factorial(n-1)
+        return n*fact(n-1)
+
+cli.add_command(factorial)
+cli.add_command(message)

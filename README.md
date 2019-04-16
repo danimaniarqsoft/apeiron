@@ -16,3 +16,6 @@ $ pip install --editable apeiron
 apeiron
 ```
 
+# References
+
+[click-setupt](http://click.palletsprojects.com/en/5.x/setuptools/)
