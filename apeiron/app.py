@@ -8,48 +8,13 @@ import apeiron.reader as r
 import click
 #from apeiron.reader import add
 
-from fpdf import FPDF
-
-def createPdf():
-    pdf = FPDF(orientation='P', unit='mm', format='letter')
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt="Reporte informativo", ln=1, align="C")
-    pdf.output("demo_pdf.pdf")
-
-def run():
-    with open('apeiron/resources/data.json', 'r', encoding='utf8') as json_file:
-        data = json.load(json_file)
-    print(data['name'])
-    for card in data['cards']:
-        print(card['name'])
-    #createPdf()
-    template = Template('Hello {{ name }}!')
-    template.render(name='John Doe')
-    env = Environment(loader=FileSystemLoader('.'))
-    template = env.get_template("apeiron/resources/templates/report.html")
-    print(template.render(title='REPORTE SEMANAL'))
-
-def forTest():
-    return None
-
 @click.command()
-@click.option("--number", prompt="factorial number",
-              help="The index of the factorial number")
-def calculate(data):
-    for item in enumerate(data):
-        print(item)
+@click.option("--n", default=1, prompt="factorial number", help="The number of the factorial")
+def cli(n):
+    print(factorial(n))
 
-def sort(numbers):
-    for i in range(len(numbers)):
-        for j in range:
-            
-def swap(idx_left,idx_right,elements):
-    temp = elements[idx_left]
-    elements[idx_right] = elements[idx_left]
-    elements[idx_left] = temp
-
-if __name__ == "__main__":
-    numbers = [2,3,9,3,7,6] 
-    # execute only if run as a script
-    sort(numbers)
+def factorial(n):
+    if(n<2):
+        return 1
+    else:
+        return n*factorial(n-1)
