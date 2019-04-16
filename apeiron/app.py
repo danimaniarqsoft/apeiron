@@ -21,6 +21,12 @@ def factorial(n):
 def message(m):
     print(m)
 
+@click.command()
+@click.option('--password', prompt=True, confirmation_prompt=True,
+              hide_input=True)
+def changeadmin(password):
+    pass
+
 def fact(n):
     if(n<2):
         return 1
@@ -29,3 +35,4 @@ def fact(n):
 
 cli.add_command(factorial)
 cli.add_command(message)
+cli.add_command(changeadmin)
