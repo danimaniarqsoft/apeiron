@@ -1,15 +1,20 @@
 """
-Generate PDF reports from trello json
+Main Command Line Interface for Plugin Management
 """ 
-import json
-from collections import namedtuple
-from jinja2 import Template, Environment, FileSystemLoader
-import apeiron.reader as r
-import click
+from pkg_resources import iter_entry_points
 
+import click
+from click_plugins import with_plugins
+
+@with_plugins(iter_entry_points('printit.plugins'))
 @click.group()
 def cli():
-    pass
+    """
+    This is the default CLI command.
+    \b
+        For add new plugins, please read the documentation
+    \b
+    """
 
 @click.command()
 @click.option("--n", default=1, prompt="factorial number", help="The number of the factorial")
