@@ -3,21 +3,12 @@
 """
 Main Command Line Interface for Plugin Management
 """
-import click
 import os
+import click
 from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
-from .model import Message
+from .commons import Message
 from .core import TemplateManager
-from jinja2 import Environment, PackageLoader, select_autoescape
-env = Environment(
-    loader=PackageLoader('apeiron', 'resources/templates', encoding='utf-8'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
-
-def get_env_vars(ctx, args, incomplete):
-    return [k for k in os.environ.keys() if incomplete in k]
-
 
 @with_plugins(iter_entry_points('apeirion.plugins'))
 @click.group()
@@ -31,20 +22,16 @@ def cli():
 
 
 @click.command()
-@click.argument("name", autocompletion=get_env_vars)
+@cli.argument("name")
 def create(name):
-    tm = TemplateManager()
-    print(tm.fill('report.html'))
-
+    model =	{
+        "name": "Ford",
+        "body": "Mustang"
+    }
+    print(TemplateManager.fill('report.html', model))
 
 @click.command()
-@click.argument("color", type=click.STRING)
-def cmd(color):
-    Message.info('info message')
-    Message.sucess('success message')
-    Message.error('error message')
-    Message.warning('warning message')
-
-
-cli.add_command(create)
-cli.add_command(cmd)
+@cli.argument('email', required=True)
+def metadata(email):
+    model = {"email": email}
+    print(TemplateManager.fill('CONTRIBUTING.md', model))
