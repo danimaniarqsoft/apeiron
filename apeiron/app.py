@@ -21,8 +21,8 @@ def cli():
     """
 
 
-@click.command()
-@cli.argument("name")
+@cli.command()
+@click.argument("name")
 def create(name):
     model =	{
         "name": "Ford",
@@ -30,8 +30,9 @@ def create(name):
     }
     print(TemplateManager.fill('report.html', model))
 
-@click.command()
-@cli.argument('email', required=True)
-def metadata(email):
+@cli.command()
+@click.option('--type', type=click.Choice(['md5', 'sha1']))
+@click.argument('email', required=True)
+def metadata(type, email):
     model = {"email": email}
     print(TemplateManager.fill('CONTRIBUTING.md', model))
