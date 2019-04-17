@@ -66,9 +66,35 @@ deactivate
 
 ## Running the tests
 
+Install `nose2`:
+
+```
+pip install nose2
+```
+
+running Test Suite:
+
+```
+python -m nose2
+```
+
+## Code Style
+
+_install_, _upgrade_ or _uninstall_ `pycodestyle`:
+
+```
+pip install pycodestyle
+pip install --upgrade pycodestyle
+pip uninstall pycodestyle
+ ```
+
+running the code style:
+
+```
+pycodestyle --first apeiron
+```
 
 ## Deployment
-
 
 [Add additional notes about how to deploy this on a live system]
 

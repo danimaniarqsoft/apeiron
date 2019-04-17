@@ -4,10 +4,12 @@ import apeiron
 
 from click.testing import CliRunner
 
-class TestSum(unittest.TestCase):
+# Initialization
+runner = CliRunner()
 
-    def test_apeiron_help(self):
-        runner = CliRunner()
+class TestApeironCommand(unittest.TestCase):
+
+    def test_apeiron_help(self): 
         result = runner.invoke(apeiron.cli, ['--help'])
         self.assertEqual(result.exit_code,0,'Should be 0')
 

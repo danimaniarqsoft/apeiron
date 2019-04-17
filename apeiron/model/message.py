@@ -1,6 +1,7 @@
 import click
 from .message_type import MessageType
 
+
 class Message:
 
     @staticmethod
