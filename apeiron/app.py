@@ -1,10 +1,14 @@
 """
 Main Command Line Interface for Plugin Management
 """ 
-from pkg_resources import iter_entry_points
-
 import click
+import os
+from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
+from .model import Message
+
+def get_env_vars(ctx, args, incomplete):
+    return [k for k in os.environ.keys() if incomplete in k]
 
 @with_plugins(iter_entry_points('apeirion.plugins'))
 @click.group()
@@ -17,27 +21,17 @@ def cli():
     """
 
 @click.command()
-@click.option("--n", default=1, prompt="factorial number", help="The number of the factorial")
-def factorial(n):
-    print(fact(int(n)))
+@click.argument("name", autocompletion=get_env_vars)
+def create(name):
+    print(name)
 
 @click.command()
-@click.option("--m", default="[no message]", prompt="common message", help="print a common messsage")
-def message(m):
-    print(m)
+@click.argument("color", type=click.STRING)
+def cmd(color):
+    Message.info('info message')
+    Message.sucess('success message')
+    Message.error('error message')
+    Message.warning('warning message')
 
-@click.command()
-@click.option('--password', prompt=True, confirmation_prompt=True,
-              hide_input=True)
-def changeadmin(password):
-    pass
-
-def fact(n):
-    if(n<2):
-        return 1
-    else:
-        return n*fact(n-1)
-
-cli.add_command(factorial)
-cli.add_command(message)
-cli.add_command(changeadmin)
+cli.add_command(create)
+cli.add_command(cmd)

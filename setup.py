@@ -23,7 +23,7 @@ VERSION = '0.0.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-     'nose', 'sphinx', 'fpdf', 'jinja2', 'weasyprint'
+     'nose', 'sphinx', 'fpdf', 'jinja2', 'click', 'click-plugins'
 ]
 
 # What packages are optional?
@@ -115,7 +115,7 @@ setup(
 
     entry_points='''
         [console_scripts]
-        apeiron=apeiron.app:cli
+        app=apeiron.app:cli
     ''',
     install_requires=REQUIRED,
     extras_require=EXTRAS,
