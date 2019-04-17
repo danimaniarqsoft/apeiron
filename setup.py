@@ -115,7 +115,7 @@ setup(
 
     entry_points='''
         [console_scripts]
-        app=apeiron.app:cli
+        apeiron=apeiron.app:cli
     ''',
     install_requires=REQUIRED,
     extras_require=EXTRAS,
