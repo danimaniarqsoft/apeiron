@@ -7,8 +7,8 @@ import os
 import click
 from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
-from .commons import Message, Files
-from .core import TemplateManager
+from apeiron.commons import Message, Files
+from apeiron.core import TemplateManager
 
 from pathlib import Path
 
@@ -23,7 +23,8 @@ def cli():
 def add_contributing_file(email):
     model = {"email": email}
     text = TemplateManager.fill('CONTRIBUTING.md', model)
-    file_path = Files.save('CONSTRIBUTING_borrar.md', text)
+    
+    file_path = Files.save(text, 'CONSTRIBUTING_borrar.md')
     Message.info('Saving file to : '+file_path.as_posix())
 
 @cli.command()
