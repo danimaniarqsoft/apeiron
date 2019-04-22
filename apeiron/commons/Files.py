@@ -11,7 +11,7 @@ class Files:
     @staticmethod
     def save(text, file_name, dir_path_to_save=Path(os.getcwd())):
         file_path_to_save = dir_path_to_save / file_name
-        if not FileVersionManager.exist(file_path_to_save):
+        if FileVersionManager.exist(file_path_to_save):
             with open(file_path_to_save, "w+") as file:
                 file.write(text)
             return file_path_to_save

@@ -23,9 +23,11 @@ def cli():
 def add_contributing_file(email):
     model = {"email": email}
     text = TemplateManager.fill('CONTRIBUTING.md', model)
-    
     file_path = Files.save(text, 'CONSTRIBUTING_borrar.md')
-    Message.info('Saving file to : '+file_path.as_posix())
+    if file_path is not None:
+        Message.info('Saving file to : '+file_path.as_posix())
+    else:
+        Message.error('File exist')
 
 @cli.command()
 def test():
