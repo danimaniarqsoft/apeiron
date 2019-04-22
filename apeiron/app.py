@@ -31,8 +31,7 @@ def create(name):
     print(TemplateManager.fill('report.html', model))
 
 @cli.command()
-@click.option('--type', type=click.Choice(['md5', 'sha1']))
-@click.argument('email', required=True)
-def metadata(type, email):
+@click.option('--email', prompt='Email')
+def metadata(email):
     model = {"email": email}
     print(TemplateManager.fill('CONTRIBUTING.md', model))
