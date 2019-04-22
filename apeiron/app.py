@@ -7,31 +7,28 @@ import os
 import click
 from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
-from .commons import Message
+from .commons import Message, Files
 from .core import TemplateManager
+
+from pathlib import Path
+
 
 @with_plugins(iter_entry_points('apeirion.plugins'))
 @click.group()
 def cli():
-    """
-    This is the default CLI command.
-    \b
-        For add new plugins, please read the documentation
-    \b
-    """
-
+    pass
 
 @cli.command()
-@click.argument("name")
-def create(name):
-    model =	{
-        "name": "Ford",
-        "body": "Mustang"
-    }
-    print(TemplateManager.fill('report.html', model))
-
-@cli.command()
-@click.option('--email', prompt='Email')
-def metadata(email):
+@click.option('--email', default="none@noe.com", prompt='Email')
+def add_contributing_file(email):
     model = {"email": email}
-    print(TemplateManager.fill('CONTRIBUTING.md', model))
+    text = TemplateManager.fill('CONTRIBUTING.md', model)
+    file_path = Files.save('CONSTRIBUTING_borrar.md', text)
+    Message.info('Saving file to : '+file_path.as_posix())
+
+@cli.command()
+def test():
+    file_data = Path(os.getcwd())
+    file_data = file_data / "hola.txt"
+    result = Files.save("holas.txt", "Saludos a todos")
+    print(result.as_posix())
