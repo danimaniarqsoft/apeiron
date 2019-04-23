@@ -15,6 +15,17 @@ class FileVersionManager:
         pass
 
     @staticmethod
+    def eq_txt(file_path_to_save, text):
+        file_sha1 = FileVersionManager.hash(file_path_to_save)
+        txt_sha1 = hashlib.sha1(text.encode()).hexdigest()
+        print(file_sha1)
+        print(txt_sha1)
+        if file_sha1 is txt_sha1:
+            return True
+        else :
+            return False
+
+    @staticmethod
     def exist(file_path):
         if not file_path.exists():
             Message.info("File not exist")
@@ -24,11 +35,12 @@ class FileVersionManager:
             return False
 
     @staticmethod
-    def hash(file_path):
-        sha1sum = hashlib.sha1()
-        with open(file_path, 'rb') as source:
-            block = source.read(2**16)
-            while len(block) != 0:
-                sha1sum.update(block)
-                block = source.read(2**16)
-        return sha1sum.hexdigest()
+    def hash(file_path, mode='sha1'):
+        h = hashlib.new(mode)
+        with open(file_path, 'rb') as file:
+            block = file.read(512)
+            while block:
+                h.update(block)
+                block = file.read(512)
+
+        return h.hexdigest()

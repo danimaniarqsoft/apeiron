@@ -24,16 +24,10 @@ def add_contributing_file(email):
     model = {"email": email}
     text = TemplateManager.fill('CONTRIBUTING.md', model)
     # write when, file not exist or user override
-
     file_path = Files.save(text, 'CONSTRIBUTING_borrar.md')
-    if file_path is not None:
-        Message.info('Saving file to : '+file_path.as_posix())
-    else:
-        Message.error('File exist')
 
 @cli.command()
 def test():
     file_data = Path(os.getcwd())
     file_data = file_data / "LICENSE"
     print(FileVersionManager.hash(file_data))
-    
