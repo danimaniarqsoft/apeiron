@@ -7,7 +7,7 @@ import os
 import click
 from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
-from apeiron.commons import Message, Files
+from apeiron.commons import Message, Files, FileVersionManager
 from apeiron.core import TemplateManager
 
 from pathlib import Path
@@ -23,6 +23,7 @@ def cli():
 def add_contributing_file(email):
     model = {"email": email}
     text = TemplateManager.fill('CONTRIBUTING.md', model)
+    # test if exist and is different
     file_path = Files.save(text, 'CONSTRIBUTING_borrar.md')
     if file_path is not None:
         Message.info('Saving file to : '+file_path.as_posix())
@@ -32,6 +33,5 @@ def add_contributing_file(email):
 @cli.command()
 def test():
     file_data = Path(os.getcwd())
-    file_data = file_data / "hola.txt"
-    result = Files.save("holas.txt", "Saludos a todos")
-    print(result.as_posix())
+    file_data = file_data / "LICENSE"
+    print(FileVersionManager.hash(file_data))
