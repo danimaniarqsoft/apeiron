@@ -18,8 +18,6 @@ class FileVersionManager:
     def eq_txt(file_path_to_save, text):
         file_sha1 = FileVersionManager.hash(file_path_to_save)
         txt_sha1 = hashlib.sha1(text.encode()).hexdigest()
-        print(file_sha1)
-        print(txt_sha1)
         if file_sha1 == txt_sha1:
             return True
         else :

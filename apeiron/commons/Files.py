@@ -15,12 +15,15 @@ class Files:
     FILE NOT EXIST -> just save it and print where is save it, return path
     '''
     @staticmethod
-    def save(text, file_name, dir_path_to_save=Path(os.getcwd())):
+    def save(text, dir_path_to_save, file_name, force_override=False):
         file_path_to_save = dir_path_to_save / file_name
-        if not file_path_to_save.exists():
+        if not file_path_to_save.exists() or force_override:
             with open(file_path_to_save, mode="w+", encoding="utf-8") as file:
                 file.write(text)
-            Message.info('Saving file to: ' + file_path_to_save.as_posix())
+            if force_override:
+                Message.warning('Overriding file at: ' + file_path_to_save.as_posix())
+            else:
+                Message.info('Adding file to: ' + file_path_to_save.as_posix())
             return True
         elif FileVersionManager.eq_txt(file_path_to_save, text):
             Message.warning('skipt - This are the same :: ' + file_path_to_save.as_posix())

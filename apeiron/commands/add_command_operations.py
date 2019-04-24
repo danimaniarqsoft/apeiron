@@ -5,6 +5,7 @@ Main Command Line Interface for Plugin Management
 """
 import os
 import click
+from pathlib import Path
 from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
 from apeiron.commons import Message, Files, FileVersionManager
@@ -13,7 +14,7 @@ from pathlib import Path
 
 class AddCommandOperations:
     @staticmethod
-    def add(email):
+    def add(email, force_override=False):
         model = {"email": email}
         text = TemplateManager.fill('CONTRIBUTING.md', model)
-        file_path = Files.save(text, 'CONSTRIBUTING_borrar.md')
+        return Files.save(text, Path(os.getcwd()), 'CONSTRIBUTING_borrar.md', force_override)

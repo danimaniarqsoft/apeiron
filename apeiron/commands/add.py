@@ -19,14 +19,10 @@ def add():
 
 @add.command()
 @click.option('--email', default="none@noe.com", prompt='Email')
-def contributing_file(email):
-    if AddCommandOperations.add(email):
-        Message.sucess("contributing file was added!")
+@click.option('--force', '-f', is_flag=True)
+def contributing_file(email, force):
+    if AddCommandOperations.add(email, force):
+        Message.sucess("\nContributing file was added!")
     else:
-        Message.error("Conflict must be resolved before")
+        Message.error("\nConflict must be resolved before")
 
-@add.command()
-def test():
-    file_data = Path(os.getcwd())
-    file_data = file_data / "LICENSE"
-    print(FileVersionManager.hash(file_data))
