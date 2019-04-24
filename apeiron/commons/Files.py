@@ -13,7 +13,7 @@ class Files:
     def save(text, file_name, dir_path_to_save=Path(os.getcwd())):
         file_path_to_save = dir_path_to_save / file_name
         if not file_path_to_save.exists():
-            with open(file_path_to_save, "w+") as file:
+            with open(file_path_to_save, mode="w+", encoding="utf-8") as file:
                 file.write(text)
             Message.info('Saving file to: ' + file_path_to_save.as_posix())
             return True
