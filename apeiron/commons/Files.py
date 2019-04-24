@@ -9,6 +9,11 @@ from apeiron.commons.file_version_manager import FileVersionManager
 
 class Files:
 
+    '''
+    FILE EXIST AND IS THE SAME -> not write and skipt, print warning
+    FILE EXIST AND IS DIFFERENT -> make a diff and not save it
+    FILE NOT EXIST -> just save it and print where is save it, return path
+    '''
     @staticmethod
     def save(text, file_name, dir_path_to_save=Path(os.getcwd())):
         file_path_to_save = dir_path_to_save / file_name
@@ -18,10 +23,8 @@ class Files:
             Message.info('Saving file to: ' + file_path_to_save.as_posix())
             return True
         elif FileVersionManager.eq_txt(file_path_to_save, text):
-            Message.info('Same Hash, hence are the same ' + file_path_to_save.as_posix())
-            return False
+            Message.warning('skipt - This are the same :: ' + file_path_to_save.as_posix())
+            return True
         else:
-            Message.info('The files are differents!!!')
+            Message.error('file conflict! :: ' + file_path_to_save.as_posix())
             return False
-
-

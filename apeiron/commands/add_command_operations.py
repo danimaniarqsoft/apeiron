@@ -9,13 +9,11 @@ from pkg_resources import iter_entry_points
 from click_plugins import with_plugins
 from apeiron.commons import Message, Files, FileVersionManager
 from apeiron.core import TemplateManager
-from apeiron.commands.add import add
-
 from pathlib import Path
 
-@with_plugins(iter_entry_points('apeirion.plugins'))
-@click.group()
-def cli():
-    pass
-
-cli.add_command(add)
+class AddCommandOperations:
+    @staticmethod
+    def add(email):
+        model = {"email": email}
+        text = TemplateManager.fill('CONTRIBUTING.md', model)
+        file_path = Files.save(text, 'CONSTRIBUTING_borrar.md')
