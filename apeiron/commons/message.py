@@ -9,6 +9,10 @@ class Message:
     @staticmethod
     def sucess(*text, sep=' ', label='\n'):
         Message.message('green', sep, label, *text)
+    
+    @staticmethod
+    def report(*text, sep=' ', label='\n'):
+        Message.message('blue', sep, label, *text)
 
     @staticmethod
     def failure(*text, sep=' ', label='\n'):

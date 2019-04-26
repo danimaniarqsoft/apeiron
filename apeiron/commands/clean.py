@@ -23,7 +23,9 @@ def clean():
 @click.option('--all', '-f', default=True, is_flag=True)
 def conflicts(all):
     if click.confirm('Do you want to clean all conflicts?'):
-        for filename in glob.iglob('**/*.conflict', recursive=True):
-            Files.delete(Path(filename))
-            #print(filename)
-            #print(Path(filename))
+        files_finded = glob.iglob('**/*.conflict', recursive=True)
+        count=0
+        for filename in files_finded:
+            Files.delete(Path(filename), silence=True)
+            count=count+1;
+        Message.report('Conflicts deleted:', str(count))
