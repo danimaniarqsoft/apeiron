@@ -3,6 +3,7 @@
 import click
 import os
 import hashlib
+import difflib
 
 from pathlib import Path
 from apeiron.commons.message import Message
@@ -41,3 +42,11 @@ class FileVersionManager:
                 sha1.update(block.encode('utf8'))
                 block = file.read(512)
         return sha1.hexdigest()
+
+    @staticmethod
+    def show_diff():
+        text1 = open("CONTRIBUTING.md").readlines()
+        text2 = open("CONTRIBUTING_borrar.md").readlines()
+
+        for line in difflib.unified_diff(text1, text2):
+            print(line)

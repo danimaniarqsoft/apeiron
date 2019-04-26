@@ -17,4 +17,4 @@ class AddCommandOperations:
     def add(email, force_override=False):
         model = {"email": email}
         text = TemplateManager.fill('CONTRIBUTING.md', model)
-        return Files.save(text, Path(os.getcwd()), 'CONSTRIBUTING_borrar.md', force_override)
+        return Files.save(text, Path(os.getcwd()), 'CONTRIBUTING_borrar.md', force_override)

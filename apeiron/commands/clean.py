@@ -13,17 +13,17 @@ from apeiron.commands.add_command_operations import AddCommandOperations
 from apeiron.commons.help_messages import HelpMessages
 
 from pathlib import Path
+import glob
 
 @click.group(help='Command to  add <components>')
-def add():
+def clean():
     pass
 
-@add.command()
-@click.option('--email', default="none@noe.com", prompt='Email', help="Add a Contributing File")
-@click.option('--force', '-f', is_flag=True)
-def contributing_file(email, force):
-    if AddCommandOperations.add(email, force):
-        Message.sucess("Contributing file was added!")
-    else:
-        Message.failure("Conflict must be resolved")
-
+@clean.command()
+@click.option('--all', '-f', default=True, is_flag=True)
+def conflicts(all):
+    if click.confirm('Do you want to clean all conflicts?'):
+        for filename in glob.iglob('**/*.conflict', recursive=True):
+            Files.delete(Path(filename))
+            #print(filename)
+            #print(Path(filename))

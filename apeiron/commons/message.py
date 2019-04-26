@@ -7,9 +7,13 @@ from .message_type import MessageType
 class Message:
 
     @staticmethod
-    def sucess(*text, sep=' ', label=''):
+    def sucess(*text, sep=' ', label='\n'):
         Message.message('green', sep, label, *text)
-        
+
+    @staticmethod
+    def failure(*text, sep=' ', label='\n'):
+        Message.message('bright_red', sep, label, *text)      
+
     @staticmethod
     def info(*text, sep=' ', label='[ INFO  ] '):
         Message.message('blue', sep, label, *text)
