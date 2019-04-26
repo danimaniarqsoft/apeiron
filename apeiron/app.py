@@ -19,3 +19,9 @@ def cli():
     pass
 
 cli.add_command(add)
+
+def sni_message(*datas):
+    print('-'.join(datas))
+
+if __name__ == "__main__":
+    click.echo(click.style('Hello World!', fg='green')+click.style('Hello World!', fg='red'))

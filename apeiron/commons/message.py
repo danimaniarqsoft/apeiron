@@ -7,30 +7,22 @@ from .message_type import MessageType
 class Message:
 
     @staticmethod
-    def sucess(text):
-        click.echo(click.style(text, fg='green'))
+    def sucess(*text, sep=' ', label=''):
+        Message.message('green', sep, label, *text)
+        
+    @staticmethod
+    def info(*text, sep=' ', label='[ INFO  ] '):
+        Message.message('blue', sep, label, *text)
 
     @staticmethod
-    def info(text):
-        click.echo(click.style(text, fg='blue'))
+    def warning(*text, sep=' ', label="[WARNING] "):
+        Message.message('bright_yellow', sep, label, *text)
 
     @staticmethod
-    def warning(text):
-        click.echo(click.style(text, fg='yellow'))
+    def error(*text, sep=' ', label='[ ERROR ] '):
+        Message.message('bright_red', sep, label, *text)
 
     @staticmethod
-    def error(text):
-        click.echo(click.style(text, fg='bright_red'))
-
-    @staticmethod
-    def message(type, text):
-        if(type == MessageType.SUCCESS):
-            Message.sucess(text)
-        elif(type == MessageType.INFO):
-            Message.info(text)
-        elif(type == MessageType.WARNING):
-            Message.warning(text)
-        elif(type == MessageType.ERROR):
-            Message.error(text)
-        else:
-            Message.info(text)
+    def message(text_color, sep, label, *text):
+        label_text = click.style(label, fg=text_color, bold=True)
+        click.echo(label_text + click.style(sep.join(text), fg=text_color))

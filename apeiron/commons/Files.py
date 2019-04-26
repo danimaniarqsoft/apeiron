@@ -18,16 +18,20 @@ class Files:
     def save(text, dir_path_to_save, file_name, force_override=False):
         file_path_to_save = dir_path_to_save / file_name
         if not file_path_to_save.exists() or force_override:
-            with open(file_path_to_save, mode="w+", encoding="utf-8") as file:
-                file.write(text)
-            if force_override:
-                Message.warning('Overriding file at: ' + file_path_to_save.as_posix())
-            else:
-                Message.info('Adding file to: ' + file_path_to_save.as_posix())
-            return True
+            return Files.write_to_file(file_path_to_save, text, force_override)
         elif FileVersionManager.eq_txt(file_path_to_save, text):
             Message.warning('skipt - This are the same :: ' + file_path_to_save.as_posix())
             return True
         else:
-            Message.error('file conflict! :: ' + file_path_to_save.as_posix())
+            Message.error('file conflicts!  ' + file_path_to_save.as_posix())
             return False
+
+    @staticmethod
+    def write_to_file(file_path_to_save, text, force_override=False):
+        with open(file_path_to_save, mode="w+", encoding="utf-8") as file:
+            file.write(text)
+            if force_override:
+                Message.warning('Overriding file at:', file_path_to_save.as_posix())
+            else:
+                Message.info('Adding file to:', file_path_to_save.as_posix())
+            return True
