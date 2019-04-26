@@ -16,16 +16,14 @@ from pathlib import Path
 import glob
 
 @click.group(help='Command to  add <components>')
-def clean():
+def show():
     pass
 
-@clean.command()
-@click.option('--all', '-f', default=True, is_flag=True)
-def conflicts(all):
-    if click.confirm('Do you want to clean all conflicts?'):
-        files_finded = glob.iglob('**/*.conflict', recursive=True)
-        count=0
-        for filename in files_finded:
-            Files.delete(Path(filename))
-            count=count+1;
-        Message.report('Conflicts deleted:', str(count))
+@show.command()
+def conflicts():
+    files_finded = glob.iglob('**/*.conflict', recursive=True)
+    count=0
+    for filename in files_finded:
+        Message.failure(Path(filename).with_suffix('').as_posix())
+        count=count+1;
+    Message.failure('Conflicts founded:', str(count))

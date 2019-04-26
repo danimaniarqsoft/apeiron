@@ -29,9 +29,9 @@ class Files:
             return False
 
     @staticmethod
-    def delete(path_to_delete, silence=False):
+    def delete(path_to_delete):
         path_to_delete.unlink()
-        Message.info('file deleted', path_to_delete.as_posix())
+        Message.report('file deleted', path_to_delete.as_posix())
 
     @staticmethod
     def write_to_file(file_path_to_save, text, force_override=False, silence=False):
