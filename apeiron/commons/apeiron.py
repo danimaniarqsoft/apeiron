@@ -15,14 +15,18 @@ class Apeiron:
     FILE EXIST AND IS DIFFERENT -> make a diff and not save it
     FILE NOT EXIST -> just save it and print where is save it, return path
     '''
-    
+
+    @staticmethod
+    def init():
+        Path(Apeiron.apeirondir()).mkdir(parents=True, exist_ok=True)
+
     @staticmethod
     def isapeiron():
-        if glob.glob('.apeiron'):
+        if glob.glob(Apeiron.apeirondir()):
             return True
         else:
             return False
     
     @staticmethod
-    def init():
-        Path('.apeiron').mkdir(parents=True, exist_ok=True)
+    def apeirondir():
+        return '.apeiron'

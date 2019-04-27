@@ -26,7 +26,7 @@ def init():
 @init.command()
 def project():
     if Apeiron.isapeiron():
-        Message.report('It is already apeiron project!')
+        Message.warning('It is already an apeiron project!', label='')
     else:
         Apeiron.init()
-        Message.report('Initialized empty Apeiron project in' + Path(os.getcwd).as_posix)
+        Message.report('Initialized empty Apeiron project in', Path(os.getcwd()).joinpath(Apeiron.apeirondir()).as_posix())
