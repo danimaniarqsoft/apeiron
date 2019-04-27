@@ -8,6 +8,7 @@ from apeiron.commons.message import Message
 from apeiron.commons.file_version_manager import FileVersionManager
 import glob
 
+
 class Files:
 
     '''
@@ -24,7 +25,7 @@ class Files:
             Message.warning('skipt - This are the same :: ' + file_path_to_save.as_posix())
             return True
         else:
-            conflict_file = dir_path_to_save / (file_name +'.conflict')
+            conflict_file = dir_path_to_save / (file_name + '.conflict')
             Files.write_to_file(conflict_file, text, force_override, True)
             Message.error('file conflicts!  ' + file_path_to_save.as_posix())
             return False
@@ -33,7 +34,7 @@ class Files:
     def delete(path_to_delete):
         path_to_delete.unlink()
         Message.report('file deleted', path_to_delete.as_posix())
-    
+
     @staticmethod
     def write_to_file(file_path_to_save, text, force_override=False, silence=False):
         with open(file_path_to_save, mode="w+", encoding="utf-8") as file:
@@ -44,4 +45,3 @@ class Files:
                 else:
                     Message.info('Adding file to:', file_path_to_save.as_posix())
             return True
-

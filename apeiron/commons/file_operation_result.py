@@ -9,6 +9,7 @@ from apeiron.commons.message_type import MessageType
 from apeiron.commons.message import Message
 from apeiron.commons.file_version_manager import FileVersionManager
 
+
 class Files(Enum):
     SAVE_OK = 0
     SAVE_ERROR_FILE_EXIST = 1

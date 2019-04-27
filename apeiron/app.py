@@ -17,10 +17,12 @@ from apeiron.commands.show import show
 from apeiron.commands.init import init
 from pathlib import Path
 
+
 @with_plugins(iter_entry_points('apeirion.plugins'))
 @click.group()
 def cli():
     pass
+
 
 cli.add_command(add)
 cli.add_command(clean)

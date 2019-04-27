@@ -9,6 +9,7 @@ from pathlib import Path
 from apeiron.commons.message import Message
 from apeiron.commons.message_type import MessageType
 
+
 class FileVersionManager:
 
     @staticmethod
@@ -21,7 +22,7 @@ class FileVersionManager:
         txt_sha1 = hashlib.sha1(text.encode()).hexdigest()
         if file_sha1 == txt_sha1:
             return True
-        else :
+        else:
             return False
 
     @staticmethod

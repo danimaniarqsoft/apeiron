@@ -14,16 +14,18 @@ from apeiron.commons.help_messages import HelpMessages
 
 from pathlib import Path
 
+
 @click.group(help='Command to  add <components>')
 def add():
     pass
 
+
 @add.command()
-@click.option('--email', default="none@noe.com", prompt='Email', help="Add a Contributing File")
+@click.option('--email', default="none@noe.com", prompt='Email',
+              help="Add a Contributing File")
 @click.option('--force', '-f', is_flag=True)
 def contributing_file(email, force):
     if AddCommandOperations.add(email, force):
         Message.sucess("Contributing file was added!")
     else:
         Message.failure("Conflict must be resolved")
-
