@@ -14,7 +14,7 @@ from apeiron.core import TemplateManager
 from apeiron.commands.add import add
 from apeiron.commands.clean import clean
 from apeiron.commands.show import show
-
+from apeiron.commands.init import init
 from pathlib import Path
 
 @with_plugins(iter_entry_points('apeirion.plugins'))
@@ -25,3 +25,4 @@ def cli():
 cli.add_command(add)
 cli.add_command(clean)
 cli.add_command(show)
+cli.add_command(init)
