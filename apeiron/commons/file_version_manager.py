@@ -4,6 +4,7 @@ import click
 import os
 import hashlib
 import difflib
+import re
 
 from pathlib import Path
 from apeiron.commons.message import Message
@@ -45,9 +46,16 @@ class FileVersionManager:
         return sha1.hexdigest()
 
     @staticmethod
-    def show_diff():
-        text1 = open("CONTRIBUTING.md").readlines()
-        text2 = open("CONTRIBUTING_borrar.md").readlines()
-
-        for line in difflib.unified_diff(text1, text2):
-            print(line)
+    def diff(left_file, right_file):
+        opened_left_file = open(left_file).readlines()
+        opened_right_file = open(right_file).readlines()
+        for line in difflib.unified_diff(opened_left_file, opened_right_file):
+            if re.search("^@@.*@@$", line):
+                is_metadata = True
+                Message.report(line, label='')
+            elif re.search("^\\+", line) :
+                is_plus_line = True
+                Message.sucess(line, label='')
+            elif re.search("^\\-", line):
+                is_minus_line = True
+                Message.failure(line, label='')

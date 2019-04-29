@@ -11,6 +11,10 @@ class Message:
         Message.message('green', sep, label, *text)
 
     @staticmethod
+    def console(*text, sep=' ', label='\n'):
+        Message.message('green', sep, label, *text)
+
+    @staticmethod
     def report(*text, sep=' ', label='\n'):
         Message.message('blue', sep, label, *text)
 

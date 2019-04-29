@@ -16,15 +16,6 @@ from apeiron.commons.help_messages import HelpMessages
 from pathlib import Path
 import glob
 
-def diff(file_path):
-    base_dir = file_path.parent
-    file_name = file_path.name
-    file_original = open(file_path).readlines()
-    file_conflict = open(base_dir / (file_name + '.conflict')).readlines()
-    for line in difflib.unified_diff(file_original, file_conflict):
-        print(line)
-    
-
 @click.group(help='Command to  add <components>')
 def show():
     pass
@@ -41,4 +32,6 @@ def conflicts(file):
             count = count + 1
         Message.failure('Conflicts founded:', str(count))
     else:
-        diff(Path(file))
+        left_file_path = Path(file)
+        right_file_path = Path(left_file_path.parent / (left_file_path.name + '.conflict'))
+        FileVersionManager.diff(Path(file), Path(right_file_path))
