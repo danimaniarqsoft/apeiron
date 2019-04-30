@@ -23,7 +23,7 @@ VERSION = '0.0.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-     'nose', 'sphinx', 'jinja2', 'click', 'click-plugins'
+     'nose', 'sphinx', 'jinja2', 'click', 'click-plugins', 'matplotlib', 'reportlab', 'Pillow'
 ]
 
 # What packages are optional?

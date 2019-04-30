@@ -16,9 +16,11 @@ from apeiron.commands.clean import clean
 from apeiron.commands.show import show
 from apeiron.commands.init import init
 from apeiron.commands.plot import plot
+from apeiron.commands.report import report
 
 from pathlib import Path
 
+commands = [add, clean, show, init, plot, report]
 
 @with_plugins(iter_entry_points('apeirion.plugins'))
 @click.group()
@@ -26,8 +28,5 @@ def cli():
     pass
 
 
-cli.add_command(add)
-cli.add_command(clean)
-cli.add_command(show)
-cli.add_command(init)
-cli.add_command(plot)
+for command in commands:
+    cli.add_command(command)
