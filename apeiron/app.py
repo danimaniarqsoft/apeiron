@@ -15,6 +15,8 @@ from apeiron.commands.add import add
 from apeiron.commands.clean import clean
 from apeiron.commands.show import show
 from apeiron.commands.init import init
+from apeiron.commands.plot import plot
+
 from pathlib import Path
 
 
@@ -28,3 +30,4 @@ cli.add_command(add)
 cli.add_command(clean)
 cli.add_command(show)
 cli.add_command(init)
+cli.add_command(plot)
