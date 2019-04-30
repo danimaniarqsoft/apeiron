@@ -3,9 +3,20 @@
 import click
 from .message_type import MessageType
 
-
 class Message:
 
+    @staticmethod
+    def content_added(*text):
+        Message.simple_message('green', *text)
+    
+    @staticmethod
+    def content_deleted(*text):
+        Message.simple_message('bright_red', *text)
+
+    @staticmethod
+    def content_metadata(*text):
+        Message.simple_message('blue', *text)
+    
     @staticmethod
     def sucess(*text, sep=' ', label='\n'):
         Message.message('green', sep, label, *text)
@@ -33,6 +44,10 @@ class Message:
     @staticmethod
     def error(*text, sep=' ', label='[ ERROR ] '):
         Message.message('bright_red', sep, label, *text)
+
+    @staticmethod
+    def simple_message(color, *text):
+        Message.message(color, ' ', '', *text)
 
     @staticmethod
     def message(text_color, sep, label, *text):

@@ -32,7 +32,7 @@ class FileVersionManager:
             Message.info("File not exist")
             return True
         else:
-            Message.info("The file exist at: "+file_path.as_posix())
+            Message.info("The file exist at: " + file_path.as_posix())
             return False
 
     @staticmethod
@@ -51,11 +51,9 @@ class FileVersionManager:
         opened_right_file = open(right_file).readlines()
         for line in difflib.unified_diff(opened_left_file, opened_right_file):
             if re.search("^@@.*@@$", line):
-                is_metadata = True
-                Message.report(line, label='')
+                Message.content_metadata(line)
             elif re.search("^\\+", line) :
-                is_plus_line = True
-                Message.sucess(line, label='')
+                Message.content_added(line)
             elif re.search("^\\-", line):
-                is_minus_line = True
-                Message.failure(line, label='')
+                Message.content_deleted(line)
+
