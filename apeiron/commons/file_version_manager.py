@@ -56,4 +56,3 @@ class FileVersionManager:
                 Message.content_added(line)
             elif re.search("^\\-", line):
                 Message.content_deleted(line)
-
