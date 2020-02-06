@@ -23,7 +23,7 @@ VERSION = '0.0.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-     'nose', 'sphinx', 'jinja2', 'click', 'click-plugins', 'matplotlib', 'reportlab', 'Pillow'
+     'nose', 'sphinx', 'jinja2', 'click', 'click-plugins', 'matplotlib', 'reportlab', 'zeep'
 ]
 
 # What packages are optional?
@@ -136,5 +136,4 @@ setup(
         'upload': UploadCommand,
     },
 )
-
 
