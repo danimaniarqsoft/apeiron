@@ -27,6 +27,12 @@ clone the repository:
 git clone https://github.com/danimaniarqsoft/apeiron
 ```
 
+install dependencies
+
+```
+pip install .
+```
+
 create an virtual enviroment and activate it
 
 ```
