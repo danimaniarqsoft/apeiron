@@ -12,8 +12,8 @@ import csv
 @click.command()
 def cvu():
     url = 'http://vsmiic230:80/cvu/ws/reporteExternoCvu'
-    headers = {'x-auth-token': '9901fedf-a2d5-4476-beb0-d7d62df06bac', 'content-type': 'text/xml'}
-    destination_path = '/home/daniel/Desktop/cvu/'
+    headers = {'x-auth-token': '40356181-a406-4df0-9629-6d18606b17da', 'content-type': 'text/xml'}
+    destination_path = '/home/daniel/Desktop/'
     
     with open('data.csv', mode='r') as infile:
         reader = csv.reader(infile)
@@ -28,6 +28,7 @@ def cvu():
                 if resp.status_code != 200:
                     print(resp.status_code)
                     writer.writerow([cvu_number, 'fail'])
+                    print(cvu_number + ', fail')
                 else:
                     soup = BeautifulSoup(resp.content, features="lxml")
                     root = ElementTree.fromstring(soup.prettify())
@@ -41,8 +42,10 @@ def cvu():
                         f.close()
                     if(file_exist):
                         writer.writerow([cvu_number, 'success'])
+                        print(cvu_number + ', success')
                     else:
-                        writer.writerow([cvu_number, 'fail'])
+                        writer.writerow([cvu_number, ', fail'])
+                        print(cvu_number + ', fail')
 
 if __name__ == '__main__':
     cvu()
