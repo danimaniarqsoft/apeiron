@@ -1,14 +1,24 @@
+import os
 import click
+import base64
 import requests
+from pathlib import Path
 from xml.etree import ElementTree
 from base64 import b64decode
+from builtins import bytes
 from util import consultar_cvu, login
 import csv
 
 @click.command()
-def cvu():
-    context = {'token': login('gochihh@gmail.com','Rkk3NzMydW5AbQ=='), 'cvu': 0}
-    destination_path = '/home/daniel/Desktop/cvu/'
+@click.option('--path', default=os.environ['HOME'], help='ruta en la que se generarán los reportes de cvu')
+@click.option('--user', help='usuario cvu con el que se iniciará sesión')
+@click.password_option(help='contraseña con la que inicia sesión')
+def cvu(path, user, password):
+    password = str(base64.b64encode(password.encode('utf-8')), 'utf-8')
+    print(password)
+    context = {'token': login(user, password), 'cvu': 0}
+    destination_path = path + '/cvu/'
+    Path(destination_path).mkdir(parents=True, exist_ok=True)
     with open('data.csv', mode='r') as infile:
         reader = csv.reader(infile)
         next(reader, None)  # skip the headers
@@ -21,10 +31,10 @@ def cvu():
                 file_exist = False
                 for repo in root.iter('archivo'):
                     file_exist = True
-                    bytes = b64decode(repo.text, validate=False)
+                    bytes_decoded = b64decode(repo.text, validate=False)
                     file_name = destination_path + str(context['cvu']) + '.pdf' 
                     f = open(file_name, 'wb')
-                    f.write(bytes)
+                    f.write(bytes_decoded)
                     f.close()
                 if(file_exist):
                     writer.writerow([context['cvu'], 'success'])
